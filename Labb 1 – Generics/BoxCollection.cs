@@ -33,16 +33,19 @@ namespace Labb_1___Generics
             return new BoxEnumerator(this);
         }
 
-
         public void Add(Box item)
         {
-            if (!Contains(item))
+            if (innerCol.Contains(item, new BoxSameDimensions()))
             {
-                innerCol.Add(item);
+                Console.WriteLine("A box with the same dimensions already exists");
+            }
+            else if(innerCol.Contains(item, new BoxSameVolume()))
+            {
+                Console.WriteLine("A box with the same volume already exists");
             }
             else
             {
-                Console.WriteLine($"Box with dimensions L:{item.height} L:{item.length} W:{item.width} already exists in the system");
+                innerCol.Add(item);
             }
         }
 
@@ -60,12 +63,8 @@ namespace Labb_1___Generics
                 if (box.Equals(item))
                 {
                     found = true;
-                    
                 }
             }
-
-            
-
             return found;
         }
 
@@ -113,6 +112,7 @@ namespace Labb_1___Generics
         {
             bool result = false;
 
+
             for (int i = 0; i < innerCol.Count; i++)
             {
                 Box box = innerCol[i];
@@ -120,9 +120,15 @@ namespace Labb_1___Generics
                 {
                     innerCol.RemoveAt(i);
                     result = true;
-                    Console.WriteLine($"Box width dimensions H: {box.height} L: {box.length} W:{box.width}");
+                    Console.WriteLine($"Box width dimensions H: {box.height} L: {box.length} W:{box.width} was removed from the collection");
                     break;
                 }
+                
+            }
+
+            if (!result)
+            {
+                Console.WriteLine($"Box width dimensions H: {item.height} L: {item.length} W:{item.width} does not exist in the collection.");
             }
 
             return result;

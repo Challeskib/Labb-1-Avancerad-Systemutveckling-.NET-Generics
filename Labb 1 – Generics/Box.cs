@@ -20,7 +20,7 @@ namespace Labb_1___Generics
 
         public bool Equals(Box? other)
         {
-            if (new BoxSameDimensions().Equals(this, other))
+            if (new BoxSameDimensions().Equals(this, other) || new BoxSameVolume().Equals(this, other))
             {
                 return true;
             }
